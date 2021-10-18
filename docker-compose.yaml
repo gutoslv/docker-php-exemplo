@@ -11,7 +11,7 @@ services:
       - ./env
     depends_on:
       - postgres
-    command: ["./wait-for-postgres.sh", "", "apache2-foreground"]
+    command: ["apache2-foreground"]
     ports:
       - 80:80
     networks:
@@ -22,6 +22,8 @@ services:
     container_name: postgres 
     env_file:
       - ./env
+    ports:
+      - 5432:5432
     volumes:
       - ./script/:/docker-entrypoint-initdb.d
       - psql-data:/var/lib/posgresql/data
